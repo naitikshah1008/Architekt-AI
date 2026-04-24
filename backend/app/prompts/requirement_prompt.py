@@ -15,6 +15,11 @@ def build_requirement_prompt(user_prompt: str) -> str:
       "constraints": ["string"],
       "open_questions": ["string"]
     }}
+    Guidelines:
+    - The system_name must reflect the main product requested by the user.
+    - Do not rename the system based on one secondary requirement.
+    - Focus primarily on backend, distributed systems, APIs, data, scalability, reliability, and security.
+    - UI requirements may be included only if relevant, but they should not dominate the output.
     User request:
     "{user_prompt}"
     """
