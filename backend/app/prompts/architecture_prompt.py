@@ -37,6 +37,11 @@ def build_architecture_prompt(user_prompt: str, requirements: RequirementSpec) -
     - Include storage choices such as PostgreSQL, Redis, object storage, search indexes, or NoSQL if needed.
     - Include practical scaling and failure-handling strategies.
     - Keep the architecture realistic.
+    - Use backend service names, not UI component names.
+    - Include core platform services such as API Gateway, User Service, Ride Service, Matching Service, Location Service, Payment Service, Notification Service, and Admin Service when relevant.
+    - Do not create direct communication from Authentication Service to business services unless required.
+    - Prefer realistic flows such as Client → API Gateway → service layer.
+    - Include asynchronous communication for events such as driver location updates, ride status changes, payment completion, and notifications.
     Original user request:
     "{user_prompt}"
     Structured requirements:
