@@ -12,7 +12,7 @@ def build_api_design_prompt(
     architecture_json = json.dumps(architecture.model_dump(), indent=2)
     return f"""
     You are a senior backend API designer.
-    Your task is to design REST API contracts based on the user's request, structured requirements, and backend architecture.
+    Your task is to design practical REST API contracts based on the user's request, structured requirements, and backend architecture.
     Return ONLY valid JSON.
     Do not include markdown.
     Do not include explanation text before or after the JSON.
@@ -31,16 +31,20 @@ def build_api_design_prompt(
     ]
     }}
     Guidelines:
-    - Generate practical REST endpoints.
+    - Generate practical REST endpoints only.
     - Keep endpoints aligned with the architecture services.
+    - Each endpoint must belong to a backend service from the architecture.
+    - Do not create frontend routes.
+    - Do not create database queries as endpoints.
     - Include request and response schemas as JSON objects.
-    - Include validation rules for required fields, IDs, pagination, auth, and state transitions where relevant.
-    - Do not create endpoints for services that do not exist in the architecture.
-    - Avoid over-designing. Include the most important endpoints only.
+    - Include validation rules for required fields, IDs, pagination, authentication, authorization, and state transitions where relevant.
+    - Prefer realistic API paths such as /users, /rides, /drivers/location, /payments, /notifications, and /admin/users.
+    - Avoid over-designing. Include the most important endpoints needed for the MVP.
+    - For asynchronous workflows, expose the API that starts the workflow and mention event-related fields in the response if needed.
     Original user request:
     "{user_prompt}"
     Structured requirements:
     {requirements_json}
-    Architecture:
+    Backend architecture:
     {architecture_json}
     """
